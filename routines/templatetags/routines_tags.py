@@ -9,6 +9,8 @@ def startswith(value, arg):
 
 @register.filter
 def minutes_from_seconds(value, arg=False):
+    if not value:
+        value=0
     value = int(value)
     mins = value / 60
     secs = value % 60
