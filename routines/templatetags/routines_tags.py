@@ -15,7 +15,8 @@ def minutes_from_seconds(value, arg=False):
     result = ""
     from django.template.defaultfilters import pluralize
     if mins:
-        result+="%d minute" % mins + pluralize(mins)
+        result+='<span class="minutes">%d</span> minute' % mins + pluralize(mins)
     if not arg or secs:
-        result+=" %d second" % secs + pluralize(secs)
-    return result
+        result+=' <span class="seconds">%d</span> second' % secs + pluralize(secs)
+    from django.utils.safestring import mark_safe 
+    return mark_safe(result)
