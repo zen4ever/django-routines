@@ -22,3 +22,15 @@ def minutes_from_seconds(value, arg=False):
         result+=' <span class="seconds">%d</span> second' % secs + pluralize(secs)
     from django.utils.safestring import mark_safe 
     return mark_safe(result)
+
+@register.filter
+def truncatechars(s, num=15):
+    length = int(num)
+    string = []
+    for word in s.split():
+        if len(word) > length:
+            string.append(word[:length]+'...')
+        else:
+            string.append(word)
+    return u' '.join(string)
+
