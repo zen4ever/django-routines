@@ -45,3 +45,11 @@ def static(filename, flags=''):
             url += '?%d' % os.path.getmtime(fullname)
     return url
 
+@register.simple_tag
+def gravatar(email, size=49, default="identicon"):
+    from django.utils.hashcompat import md5_constructor
+    import urllib
+    from django.utils.html import escape
+    url = "http://www.gravatar.com/avatar/%s/?" % md5_constructor(email).hexdigest()
+    url += urllib.urlencode({"s": str(size), "default": default})
+    return escape(url)
