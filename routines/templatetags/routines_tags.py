@@ -53,3 +53,10 @@ def gravatar(email, size=49, default="identicon"):
     url = "http://www.gravatar.com/avatar/%s/?" % md5_constructor(email).hexdigest()
     url += urllib.urlencode({"s": str(size), "default": default})
     return escape(url)
+
+@register.filter
+def localeformat(value, format):
+    import locale
+    locale.setlocale(locale.LC_ALL, "")
+    return locale.format("%"+format, value, True) 
+
